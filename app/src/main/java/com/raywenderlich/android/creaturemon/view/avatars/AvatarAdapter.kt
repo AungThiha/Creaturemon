@@ -33,7 +33,7 @@ package com.raywenderlich.android.creaturemon.view.avatars
 import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -42,7 +42,7 @@ import com.raywenderlich.android.creaturemon.app.inflate
 import com.raywenderlich.android.creaturemon.model.Avatar
 
 class AvatarAdapter(private val avatars: List<Avatar>, private val listener: AvatarListener)
-  : RecyclerView.Adapter<AvatarAdapter.ViewHolder>() {
+  : androidx.recyclerview.widget.RecyclerView.Adapter<AvatarAdapter.ViewHolder>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     return ViewHolder(parent.inflate(R.layout.list_item_avatar))
@@ -54,7 +54,7 @@ class AvatarAdapter(private val avatars: List<Avatar>, private val listener: Ava
     holder.bind(avatars[position])
   }
 
-  inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+  inner class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
     private lateinit var avatar: Avatar
 

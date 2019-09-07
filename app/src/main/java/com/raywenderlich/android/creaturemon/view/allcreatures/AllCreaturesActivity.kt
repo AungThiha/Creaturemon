@@ -2,8 +2,8 @@ package com.raywenderlich.android.creaturemon.view.allcreatures
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import com.raywenderlich.android.creaturemon.R
@@ -20,7 +20,7 @@ class AllCreaturesActivity : AppCompatActivity() {
     setContentView(R.layout.activity_all_creatures)
     setSupportActionBar(toolbar)
 
-    creaturesRecyclerView.layoutManager = LinearLayoutManager(this)
+    creaturesRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
     creaturesRecyclerView.adapter = adapter
 
     fab.setOnClickListener {

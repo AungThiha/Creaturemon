@@ -30,7 +30,7 @@
 
 package com.raywenderlich.android.creaturemon.view.allcreatures
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.raywenderlich.android.creaturemon.R
@@ -39,7 +39,7 @@ import com.raywenderlich.android.creaturemon.model.Creature
 import kotlinx.android.synthetic.main.list_item_creature.view.*
 
 class CreatureAdapter(private val creatures: MutableList<Creature>)
-  : RecyclerView.Adapter<CreatureAdapter.ViewHolder>() {
+  : androidx.recyclerview.widget.RecyclerView.Adapter<CreatureAdapter.ViewHolder>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     return ViewHolder(parent.inflate(R.layout.list_item_creature))
@@ -57,7 +57,7 @@ class CreatureAdapter(private val creatures: MutableList<Creature>)
     notifyDataSetChanged()
   }
 
-  class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+  class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
     private lateinit var creature: Creature
 

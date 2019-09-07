@@ -30,7 +30,7 @@
 
 package com.raywenderlich.android.creaturemon.model.room
 
-import android.arch.persistence.room.RoomDatabase
+import androidx.room.RoomDatabase
 
 abstract class CreatureDatabase : RoomDatabase() {
   abstract fun creatureDao(): CreatureDao

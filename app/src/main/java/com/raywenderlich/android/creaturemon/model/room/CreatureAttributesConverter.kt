@@ -30,7 +30,7 @@
 
 package com.raywenderlich.android.creaturemon.model.room
 
-import android.arch.persistence.room.TypeConverter
+import androidx.room.TypeConverter
 import com.raywenderlich.android.creaturemon.model.CreatureAttributes
 import java.util.*
 
