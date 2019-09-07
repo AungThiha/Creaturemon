@@ -39,13 +39,13 @@ import com.raywenderlich.android.creaturemon.model.Creature
 import kotlinx.android.synthetic.main.list_item_creature.view.*
 
 class CreatureAdapter(private val creatures: MutableList<Creature>)
-  : androidx.recyclerview.widget.RecyclerView.Adapter<CreatureAdapter.ViewHolder>() {
+  : RecyclerView.Adapter<CreatureAdapter.ViewHolder>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     return ViewHolder(parent.inflate(R.layout.list_item_creature))
   }
 
-  override fun onBindViewHolder(holder: CreatureAdapter.ViewHolder, position: Int) {
+  override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     holder.bind(creatures[position])
   }
 
@@ -57,13 +57,18 @@ class CreatureAdapter(private val creatures: MutableList<Creature>)
     notifyDataSetChanged()
   }
 
-  class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+  class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private lateinit var creature: Creature
 
     fun bind(creature: Creature) {
       this.creature = creature
-      // TODO: populate views
+      with(creature) {
+        itemView.avatarListItem.setImageResource(drawable)
+        itemView.name.text = name
+        itemView.hitPoints.text = hitPoints.toString()
+      }
+
     }
   }
 }
