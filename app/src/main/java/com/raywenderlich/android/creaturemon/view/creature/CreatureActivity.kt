@@ -38,9 +38,11 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.raywenderlich.android.creaturemon.R
+import com.raywenderlich.android.creaturemon.databinding.ActivityCreatureBinding
 import com.raywenderlich.android.creaturemon.model.AttributeStore
 import com.raywenderlich.android.creaturemon.model.AttributeType
 import com.raywenderlich.android.creaturemon.model.AttributeValue
@@ -55,11 +57,14 @@ class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener {
 
   private lateinit var viewModel: CreatureViewModel
 
+  lateinit var binding: ActivityCreatureBinding
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_creature)
+    binding = DataBindingUtil.setContentView(this, R.layout.activity_creature)
 
     viewModel = ViewModelProviders.of(this).get(CreatureViewModel::class.java)
+    binding.viewmodel = viewModel
 
     configureUI()
     configureSpinnerAdapters()
@@ -120,15 +125,6 @@ class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener {
       val bottomDialogFragment = AvatarBottomDialogFragment.newInstance()
       bottomDialogFragment.show(supportFragmentManager, "AvatarBottomDialogFragment")
     }
-
-    saveButton.setOnClickListener {
-      if (viewModel.saveCreature()) {
-        Toast.makeText(this, R.string.creature_saved, Toast.LENGTH_SHORT).show()
-        finish()
-      } else {
-        Toast.makeText(this, R.string.error_saving_creature, Toast.LENGTH_SHORT).show()
-      }
-    }
   }
 
   private fun configureLiveDataObservers() {
@@ -137,6 +133,17 @@ class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener {
         hitPoints.text = it.hitPoints.toString()
         avatarImageView.setImageResource(it.drawable)
         nameEditText.setText(creature.name)
+      }
+    })
+
+    viewModel.getSaveLiveData().observe(this, Observer { saved ->
+      saved?.let {
+        if (it) {
+          Toast.makeText(this, R.string.creature_saved, Toast.LENGTH_SHORT).show()
+          finish()
+        } else {
+          Toast.makeText(this, R.string.error_saving_creature, Toast.LENGTH_SHORT).show()
+        }
       }
     })
   }

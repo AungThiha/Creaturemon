@@ -13,7 +13,11 @@ class CreatureViewModel(
 
   private val creatureLiveData = MutableLiveData<Creature>()
 
+  private val saveLiveData = MutableLiveData<Boolean>()
+
   fun getCreatureLiveData(): LiveData<Creature> = creatureLiveData
+
+  fun getSaveLiveData(): LiveData<Boolean> = saveLiveData
 
   var name = ""
   var intelligence = 0
@@ -49,12 +53,12 @@ class CreatureViewModel(
     updateCreature()
   }
 
-  fun saveCreature(): Boolean {
+  fun saveCreature() {
     return if (canSaveCreature()) {
       creatureRepository.saveCreature(creature)
-      true
+      saveLiveData.postValue(true)
     } else {
-      false
+      saveLiveData.postValue(false)
     }
   }
 
